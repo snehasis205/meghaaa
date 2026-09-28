@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#07091a">
+<title>For Megha 🌙</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="loader" aria-label="Loading"><div class="lmoon"></div></div>
+<canvas id="bg" aria-hidden="true"></canvas>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div id="cursor" aria-hidden="true"></div>
+<div id="mid" aria-hidden="true">Still here? I knew you were curious 👀</div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<header>
+  <span id="prog">01 / 10</span>
+  <span>
+    <button class="ico" id="moon" aria-label="The moon (tap for a secret)">🌙</button>
+    <button class="ico" id="snd" aria-pressed="true" aria-label="Sound effects on">🔊</button>
+  </span>
+</header>
+
+<main>
+<!-- 1 -->
+<section class="screen active" id="s1">
+  <h1>For <span class="nm" id="nameTap"></span> 🌙</h1>
+  <p class="sub">A little late. A little unexpected. Maybe the beginning of something?</p>
+  <div class="stack" id="l1"></div>
+  <button class="btn" id="open" data-go="2" hidden>Open it →</button>
+</section>
+
+<!-- 2 -->
+<section class="screen" id="s2">
+  <div class="stack" id="l2"></div>
+  <button class="btn" id="why" hidden>That name needs an explanation 👀</button>
+  <div class="stack" id="ex"></div>
+  <div id="orbWrap" hidden>
+    <p class="hint">Some little lights are floating around. Tap them ✨</p>
+    <div class="orbs" id="orbs"></div>
+    <p class="whisper" id="whisper" aria-live="polite"></p>
+  </div>
+  <p class="hint continue-note">You can explore the little lights, then continue whenever you're ready.</p>
+  <button class="btn" id="to3" data-go="3" hidden>Okay, go on →</button>
+</section>
+
+<!-- 3 -->
+<section class="screen" id="s3">
+  <h1>Happy Belated Birthday, <span class="nm"></span> 🎂</h1>
+  <div class="stack" id="l3"></div>
+  <div id="cakeBox" hidden>
+    <svg class="cake" viewBox="0 0 300 250" role="img" aria-label="A birthday cake with one candle">
+      <defs>
+        <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb3d6"/><stop offset="1" stop-color="#e77fb0"/></linearGradient>
+        <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c9b6ff"/><stop offset="1" stop-color="#8f7bff"/></linearGradient>
+      </defs>
+      <ellipse cx="150" cy="232" rx="125" ry="12" fill="#000" opacity=".35"/>
+      <rect x="45" y="150" width="210" height="80" rx="12" fill="url(#g2)"/>
+      <rect x="75" y="100" width="150" height="56" rx="12" fill="url(#g1)"/>
+      <path d="M75 116q14 18 28 0t28 0 28 0 28 0 28 0v-8h-140z" fill="#fff5fb"/>
+      <path d="M45 166q17 20 35 0t35 0 35 0 35 0 35 0v-10h-175z" fill="#f1eaff"/>
+      <g fill="#ffd9a0"><circle cx="100" cy="196" r="4"/><circle cx="150" cy="204" r="4"/><circle cx="200" cy="196" r="4"/></g>
+      <g id="candle" tabindex="0" role="button" aria-label="Blow out the candle">
+        <rect x="143" y="70" width="14" height="34" rx="3" fill="#fff"/>
+        <path d="M143 80l14 6M143 90l14 6" stroke="#ff9ecb" stroke-width="3"/>
+        <g class="flame" id="flame"><path d="M150 40c12 12 12 24 0 30c-12-6-12-18 0-30z" fill="#ffb84d"/><path d="M150 52c6 6 6 12 0 16c-6-4-6-10 0-16z" fill="#fff3c4"/></g>
+        <path id="smoke" d="M150 60q-8-10 0-20t0-20" stroke="#cfc6ee" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </g>
+    </svg>
+    <p class="hint" id="cakeHint">Tap the candle to blow it out (make a wish, obviously).</p>
+  </div>
+  <div class="stack" id="l3b"></div>
+  <button class="btn" data-go="4" id="to4" hidden>Continue →</button>
+  <button class="hh" id="hh" aria-label="A tiny hidden heart">♥</button>
+</section>
+
+<!-- 4 -->
+<section class="screen" id="s4">
+  <h2>How well do you think we can get to know each other?</h2>
+  <p class="hint" id="qn"></p>
+  <div class="glass card" id="quiz"></div>
+  <div class="stack" id="qres"></div>
+  <button class="btn" data-go="5" id="to5" hidden>Next game →</button>
+</section>
+
+<!-- 5 -->
+<section class="screen" id="s5">
+  <h2>Catch the hearts</h2>
+  <p class="hint">You have 20 seconds. Tap as many as you can.</p>
+  <p class="stat">HEARTS COLLECTED: <b id="hc">0</b> &nbsp;·&nbsp; <b id="ht">20</b>s</p>
+  <div class="arena glass" id="arena"></div>
+  <p class="line in" id="gres"></p>
+  <button class="btn in" id="gstart">Start ✨</button>
+  <button class="btn" data-go="6" id="to6" hidden>Continue →</button>
+</section>
+
+<!-- 6 -->
+<section class="screen" id="s6">
+  <h2>This or that</h2>
+  <p class="hint" id="tn"></p>
+  <div class="glass card" id="tot"></div>
+  <div class="chips" id="chips"></div>
+  <div class="stack" id="l6"></div>
+  <button class="btn" data-go="7" id="to7" hidden>Continue →</button>
+</section>
+
+<!-- 7 -->
+<section class="screen" id="s7">
+  <div class="stack" id="l7"></div>
+  <div class="glass player" id="player" hidden>
+    <svg class="cover" viewBox="0 0 200 200" role="img" aria-label="Album cover: a moon over a night sky">
+      <defs><linearGradient id="cg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a1f6b"/><stop offset="1" stop-color="#0b0d2a"/></linearGradient>
+      <radialGradient id="cm"><stop offset="0" stop-color="#fff7e0"/><stop offset="1" stop-color="#ffd9a0"/></radialGradient></defs>
+      <rect width="200" height="200" rx="18" fill="url(#cg)"/>
+      <g fill="#fff"><circle cx="30" cy="40" r="1.5"/><circle cx="160" cy="30" r="1.2"/><circle cx="170" cy="120" r="1.6"/><circle cx="50" cy="150" r="1.2"/><circle cx="120" cy="170" r="1.4"/><circle cx="90" cy="25" r="1"/></g>
+      <circle cx="100" cy="88" r="38" fill="url(#cm)"/><circle cx="116" cy="78" r="34" fill="#1a1550"/>
+      <path d="M30 175q35-30 70-8t70-8v41H30z" fill="#ff9ecb" opacity=".25"/>
+      <text x="100" y="188" text-anchor="middle" fill="#f3ecff" font-size="14" font-family="Georgia,serif" font-style="italic">For <tspan class="nm"></tspan></text>
+    </svg>
+    <div class="meta"><h3>For <span class="nm"></span></h3><p>A little something, just because.</p></div>
+    <div class="viz" id="viz" aria-hidden="true"></div>
+    <audio id="au" preload="metadata"></audio>
+    <input type="range" id="seek" min="0" max="1000" value="0" aria-label="Seek">
+    <div class="times"><span id="cur">0:00</span><span id="dur">0:00</span></div>
+    <div class="ctrl">
+      <button class="play" id="pp" aria-label="Play">▶</button>
+      <label class="vol">🔉 <input type="range" id="vol" min="0" max="1" step="0.01" value="0.8" aria-label="Volume"></label>
+    </div>
+    <p class="hint" id="astat"></p>
+  </div>
+  <div class="stack" id="l7b"></div>
+  <button class="btn" data-go="8" id="to8" hidden>Continue →</button>
+</section>
+
+<!-- 8 -->
+<section class="screen" id="s8">
+  <div class="paper glass" id="letter"></div>
+  <button class="btn" data-go="9" id="to9" hidden>Continue →</button>
+</section>
+
+<!-- 9 -->
+<section class="screen" id="s9">
+  <div class="stack" id="l9"></div>
+  <div class="choice" id="choice" hidden>
+    <button class="btn yes" id="yes">YES ✨</button>
+    <button class="no" id="no" aria-describedby="tip">NO</button>
+    <p class="hint" id="tip"></p>
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="screen" id="s10">
+  <div class="stack" id="l10"></div>
+  <button class="btn yes" id="final" hidden>Start Something New 🌙</button>
+  <div class="stack" id="fin"></div>
+</section>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
